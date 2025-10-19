@@ -11,4 +11,5 @@ url = "https://www.billboard.com/charts/hot-100/"+input_date
 
 response = requests.get(url=url, headers = headers)
 
-print(response.json())
+print(response.text)
+
