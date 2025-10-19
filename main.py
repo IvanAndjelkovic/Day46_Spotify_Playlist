@@ -1,4 +1,5 @@
 import requests 
+from bs4 import BeautifulSoup
 
 
 
@@ -13,3 +14,7 @@ response = requests.get(url=url, headers = headers)
 
 print(response.text)
 
+soup = BeautifulSoup(response.text, "html.parser")
+
+h3_tags = soup.find_all(name='h3', id="title-of-a-story", class_="a-no-trucate")
+print(h3_tags[0])
