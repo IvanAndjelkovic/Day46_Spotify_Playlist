@@ -16,5 +16,6 @@ print(response.text)
 
 soup = BeautifulSoup(response.text, "html.parser")
 
-h3_tags = soup.find_all(name='h3', id="title-of-a-story", class_="a-no-trucate")
-print(h3_tags[0])
+chart_results = soup.find_all("li", class_="o-chart-results-list__item")
+for item in chart_results:
+    print(item.find("h3", id="Title-of-a-story").get_text(strip=True)).strip()
