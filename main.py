@@ -9,7 +9,7 @@ from spotipy.oauth2 import SpotifyOAuth
 
 CLIENT_ID = dotenv.get_key(".env", "CLIENT_ID") 
 CLIENT_SECRET = dotenv.get_key(".env", "CLIENT_SECRET")
-REDIRECT_URI = "http://localhost:8888/callback"
+REDIRECT_URI = "http://example.com"
 scope = "playlist-modify-private"
 
 
