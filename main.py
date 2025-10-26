@@ -9,7 +9,7 @@ from spotipy.oauth2 import SpotifyOAuth
 
 CLIENT_ID = dotenv.get_key(".env", "CLIENT_ID") 
 CLIENT_SECRET = dotenv.get_key(".env", "CLIENT_SECRET")
-REDIRECT_URI = "http://example.com"
+REDIRECT_URI = "https://example.com"
 scope = "playlist-modify-private"
 
 
@@ -62,3 +62,6 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
 # Test the connection
 current_user = sp.current_user()
 print(f"Connected to Spotify as: {current_user['display_name']}")
+
+current_user_id = current_user['id']
+print(f"User ID: {current_user_id}")
