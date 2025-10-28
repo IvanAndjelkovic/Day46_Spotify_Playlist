@@ -1,6 +1,7 @@
 import requests 
 from bs4 import BeautifulSoup
 import dotenv
+import pprint
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -66,4 +67,4 @@ for item in list_100:
     except IndexError:
         print(f"Song not found on Spotify: {item}")
 
-print(url_list_100)
+pprint.pp(url_list_100)
