@@ -32,36 +32,38 @@ list_100 = []
 tags= soup.select("li.o-chart-results-list__item h3.c-title")
 for tag in tags:
     song_title = tag.getText().strip()
-    list_100.append(song_title)
+    artist = tag.find_next('a').getText().strip()
+    list_100.append(f'track: {song_title} artist: {artist} year: {input_date[:4]}')
 
 print(list_100)
 
 
 
-# sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=CLIENT_ID,
-#                                                            client_secret=CLIENT_SECRET))
 
-# results = sp.search(q='weezer', limit=20)
-# for idx, track in enumerate(results['tracks']['items']):
-#     print(idx, track['name'])
 
-# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
-#     client_id=CLIENT_ID,
-#     client_secret=CLIENT_SECRET,
-#     redirect_uri=REDIRECT_URI,
-#     scope=scope
-# ))
+# Authenticate and create Spotify object
 
-# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
-#     client_secret=CLIENT_SECRET,
-#     redirect_uri=REDIRECT_URI,
-#     scope=scope,
-#     open_browser=True  # This will open the browser automatically
-# ))
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
+    client_secret=CLIENT_SECRET,
+    redirect_uri=REDIRECT_URI,
+    scope=scope,
+    open_browser=True  # This will open the browser automatically
+))
 
-# # Test the connection
-# current_user = sp.current_user()
-# print(f"Connected to Spotify as: {current_user['display_name']}")
+# Test the connection
+current_user = sp.current_user()
+print(f"Connected to Spotify as: {current_user['display_name']}")
 
-# current_user_id = current_user['id']
+current_user_id = current_user['id']
 # print(f"User ID: {current_user_id}")
+
+# url = sp.search("artist: 'Sam Smith' track: 'Unholy' year: 2022",limit=10,type='track')['tracks']['items'][0]['external_urls']['spotify']
+url_list_100 = []
+for item in list_100:
+    try:
+        url = sp.search(item,limit=10,type='track')['tracks']['items'][0]['external_urls']['spotify']
+        url_list_100.append(url)
+    except IndexError:
+        print(f"Song not found on Spotify: {item}")
+
+print(url_list_100)
