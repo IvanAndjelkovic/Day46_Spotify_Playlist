@@ -67,4 +67,8 @@ for item in list_100:
     except IndexError:
         print(f"Song not found on Spotify: {item}")
 
-pprint.pp(url_list_100)
+pl = sp.user_playlist_create(current_user_id ,"Billboard 100 from "+input_date, public=False, description="Top 100 songs from Billboard on "+input_date)
+pl_id = pl['id']
+
+sp.playlist_add_items(playlist_id=pl_id, items=url_list_100)
+print("Playlist created successfully!")
